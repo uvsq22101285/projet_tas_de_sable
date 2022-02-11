@@ -1,4 +1,4 @@
-#ICI LE CODE DU TAS DE SABLE 
+#Contributors : GNICHI Rim - BACLE Arnaud - MOBRÉ Eliott - SUZANNE Jean-Alexandre
 
 #PARTIE TKINTER
 
