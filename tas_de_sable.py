@@ -14,7 +14,6 @@ from time import sleep
 bonsoir 
 
 
-
 #PARTIE CODE 
 
 #création de la grille et répartition du sable
