@@ -1,5 +1,15 @@
 #Contributors : GNICHI Rim - BACLE Arnaud - MOBRÉ Eliott - SUZANNE Jean-Alexandre
 
+
+#########################################
+# groupe MPCI 04
+# Rim GNICHI
+# Arnaud BACLE
+# Eliott MOBRE
+# Jean-Alexandre SUZANNE
+# https://github.com/uvsq22101285/projet_tas_de_sable
+#########################################
+
 #PARTIE TKINTER
 
 ######################
