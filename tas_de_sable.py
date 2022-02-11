@@ -15,5 +15,4 @@ from time import sleep
 bonsoir 
 
 
-
 #PARTIE CODE 
