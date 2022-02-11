@@ -5,4 +5,4 @@ Ici se trouve le projet du tas de sable en collaboration avec : GNICHI Rim - BAC
 
 Waaaaaah ... c'est trop classe ! 
 Not here
-Bonsoir je suis RIM
+Bonsoir je suis RIM et moi JA
