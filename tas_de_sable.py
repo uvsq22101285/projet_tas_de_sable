@@ -11,8 +11,8 @@ from time import sleep
 
 ######################
 #Fenêtres Affichages
+bonsoir 
 
-ysbyyhsysèht
 
 
 #PARTIE CODE 
