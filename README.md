@@ -7,3 +7,4 @@ Waaaaaah ... c'est trop classe !
 Not here
 Bonsoir je suis RIM et moi JA
 Je fais un essai
+salut tout le monde
