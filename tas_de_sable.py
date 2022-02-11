@@ -11,11 +11,23 @@ from time import sleep
 
 ######################
 #Fenêtres Affichages
+
 #Constantes
 
 HAUTEUR = 600
 LARGEUR = 600
 
+######################
+#WIDGET
+
+racine = tk.Tk()
+racine.title("Tas de sable")
+canvas = tk.Canvas(racine, height=HAUTEUR, width=LARGEUR)
+
+#placement des widgets
+canvas.grid(column=1, row=0)
+
+racine.mainloop()
 
 #PARTIE CODE 
 
