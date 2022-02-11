@@ -11,7 +11,10 @@ from time import sleep
 
 ######################
 #Fenêtres Affichages
-bonsoir 
+#Constantes
+
+HAUTEUR = 600
+LARGEUR = 600
 
 
 #PARTIE CODE 
