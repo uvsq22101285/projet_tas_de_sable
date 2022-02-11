@@ -5,12 +5,15 @@
 ######################
 
 #Import des librairies
-import tkinter as tk 
+from ast import Global
+import tkinter as tk
+import random as r
+from time import sleep
 
 ######################
 #Fenêtres Affichages
+bonsoir 
 
-ysbyyhsysèht
 
 
 #PARTIE CODE 
