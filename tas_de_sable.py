@@ -18,6 +18,8 @@
 import tkinter as tk
 import random as r
 from time import sleep
+from tkinter import font
+from turtle import bgcolor
 
 ######################
 #Fenêtres Affichages
@@ -35,7 +37,9 @@ racine.title("Tas de sable")
 canvas = tk.Canvas(racine, height=HAUTEUR, width=LARGEUR)
 
 #placement des widgets
-canvas.grid(column=1, row=0)
+canvas.grid(column=1, rowspan=2)
+bouton= tk.Button(racine,text="GUI",bg="red")
+bouton.grid(row=0)
 
 racine.mainloop()
 
