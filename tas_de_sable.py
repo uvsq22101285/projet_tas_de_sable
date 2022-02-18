@@ -28,9 +28,6 @@ from turtle import bgcolor
 
 
 
-
-
-
 ######################
 #PARTIE CODE 
 
