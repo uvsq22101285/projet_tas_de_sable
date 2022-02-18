@@ -20,11 +20,29 @@ import random as r
 from time import sleep
 from tkinter import font
 from turtle import bgcolor
+import tkinter as tk
+from time import sleep
 
 ######################
 #Fenêtres Affichages
 
 #variables globales
+long = 9
+#Fonction lié aux WIDGETS
+
+def recommencer():
+    "pas le temps"
+    global grille, long
+    long = int(input())
+
+
+#WIDGET
+racine = tk.Tk()
+racine.title("Tas de sable")
+canvas = tk.Canvas(racine, height=450, width=450)
+bouton = tk.Button(racine, text="Recommencer", command=recommencer)
+
+
 
 
 
@@ -33,9 +51,7 @@ from turtle import bgcolor
 
 
 #Import des librairies
-import tkinter as tk
-from time import sleep
-long = 9
+
 
 #Creer Matrice de 0
 grille =  [[0 for i in range(long)] for j in range(long)]
@@ -83,18 +99,15 @@ def sandMove(l):
                 newGrille[x][y+1] +=1
     grille = newGrille
 
-#WIDGET
-racine = tk.Tk()
-racine.title("Tas de sable")
-canvas = tk.Canvas(racine, height=450, width=450)
+
 
 #affiche la grille
 show = []
 for x in range(long):
-    uoko = []
+    colonnes = []
     for y in range(long):
-        uoko.append(canvas.create_rectangle(50*x,50*y,50+50*x,50+50*y,fill=FindColor(x,y,grille),outline="black") )
-    show.append(uoko)
+        colonnes.append(canvas.create_rectangle(50*x,50*y,50+50*x,50+50*y,fill=FindColor(x,y,grille),outline="black") )
+    show.append(colonnes)
 
 
 for o in range(16) :
@@ -108,4 +121,10 @@ for o in range(16) :
     sandMove(long)
 
 
+
+#Placement WIDGET
+
+canvas.grid()
+bouton.grid(row=1)
 racine.mainloop()
+
