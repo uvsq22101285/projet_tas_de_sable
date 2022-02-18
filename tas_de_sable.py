@@ -35,7 +35,7 @@ from turtle import bgcolor
 #Import des librairies
 import tkinter as tk
 from time import sleep
-long = 9
+long = 15
 
 #Creer Matrice de 0
 grille =  [[0 for i in range(long)] for j in range(long)]
@@ -91,10 +91,10 @@ canvas = tk.Canvas(racine, height=450, width=450)
 #affiche la grille
 show = []
 for x in range(long):
-    uoko = []
+    columnShow = []
     for y in range(long):
-        uoko.append(canvas.create_rectangle(50*x,50*y,50+50*x,50+50*y,fill=FindColor(x,y,grille),outline="black") )
-    show.append(uoko)
+        columnShow.append(canvas.create_rectangle(450/long*x,450/long*y,50+450/long*x,50+450/long*y,fill=FindColor(x,y,grille),outline="black") )
+    show.append(columnShow)
 
 
 for o in range(1) :
