@@ -18,9 +18,6 @@
 import tkinter as tk
 import random as r
 from time import sleep
-from tkinter import font
-from turtle import bgcolor
-
 ######################
 #Fenêtres Affichages
 
@@ -39,7 +36,7 @@ long = 15
 
 #Creer Matrice de 0
 grille =  [[0 for i in range(long)] for j in range(long)]
-grille[long//2][long//2] = 16
+grille[long//2][long//2] = 260
 
 def FindColor(x,y,g):
     if g[x][y] == '#':
@@ -76,7 +73,7 @@ def sandMove(l):
         for y in range(long):
             num = grille[x][y]
             if num >= 4 :
-                newGrille[x][y] = grille[x][y] -4
+                newGrille[x][y] += num -4
                 newGrille[x-1][y] +=1
                 newGrille[x+1][y] +=1
                 newGrille[x][y-1] +=1
@@ -97,13 +94,12 @@ for x in range(long):
     show.append(columnShow)
 
 
-for o in range(1) :
+for o in range(120) :
     bordureFill(grille,long,'#')
     for x in range(long):
         for y in range(long):
             canvas.itemconfig(show[x][y], fill=FindColor(x,y,grille))
-            canvas.grid()  
-    sleep(1)  
+            canvas.grid()   
     bordureFill(grille,long,0)
     sandMove(long)
 
