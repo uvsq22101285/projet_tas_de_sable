@@ -26,6 +26,12 @@ from turtle import bgcolor
 
 #variables globales
 
+
+
+
+
+
+######################
 #PARTIE CODE 
 
 #création de la grille et répartition du sable
