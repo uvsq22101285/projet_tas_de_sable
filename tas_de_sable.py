@@ -25,60 +25,6 @@ from turtle import bgcolor
 #Fenêtres Affichages
 
 #variables globales
-col = 0
-
-
-#coordonnées du rectangle
-x1,y1 = 150, 150
-x2,y2 = 350, 350
-
-#variable qui dit si on continue de changer les couleurs
-continuer = True 
-
-def recommencer():
-    """On verra"""
-    global col, continuer
-    col = 0
-    continuer = True
-    canvas.itemconfigure(rectangle, fill="red")
-
-def gestion_clic(event):
-    """On verra"""
-    global col, continuer
-    if continuer == False:
-        return 
-
-    liste_col= ["blue","pink"]
-
-    #Si on clique dans le rectangle
-    if x1 < event.x < x2 and y1 < event.y < y2:
-        col = 1 - col
-        canvas.itemconfigure(rectangle, fill=liste_col[col])
-    else:
-        continuer = False 
-
-#création des widgets
-racine = tk.Tk()
-racine.title("Lugras est Moregros")
-canvas = tk.Canvas(racine, bg="black", heigh=500, width=500)
-bouton = tk.Button(racine, text="Recommencer", command=recommencer)
-
-
-#création du rectangle
-rectangle = canvas.create_rectangle((x1,y1),(x2,y2), fill="red")
-
-#liaison de l'événement 
-canvas.bind('<Button-1>', gestion_clic)
-
-
-
-#positionnement des widgets
-canvas.grid()
-bouton.grid(row=1)
-racine.mainloop()
-
-
-
 
 #PARTIE CODE 
 
