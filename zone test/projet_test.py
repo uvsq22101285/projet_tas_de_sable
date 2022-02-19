@@ -82,8 +82,13 @@ while O == 1:
 
 
 #Creer Matrice de 0
+<<<<<<< HEAD
 
     
+=======
+grille =  [[0 for i in range(long)] for j in range(long)]
+grille[long//2][long//2] = 25
+>>>>>>> fc3bcbe2c37dd99a7832a7ad0e9c38699ad450bc
 
 def FindColor(x,y,g):
     if g[x][y] == '#':
@@ -120,7 +125,7 @@ def sandMove(l):
         for y in range(long):
             num = grille[x][y]
             if num >= 4 :
-                newGrille[x][y] = grille[x][y] -4
+                newGrille[x][y] += num -4
                 newGrille[x-1][y] +=1
                 newGrille[x+1][y] +=1
                 newGrille[x][y-1] +=1
@@ -141,7 +146,12 @@ if go == True:
     canvas = tk.Canvas(racine, height=450, width=450)
     racine.eval('tk::PlaceWindow %s center' % racine.winfo_toplevel())
 
+<<<<<<< HEAD
     show = []
+=======
+for o in range(16) :
+    bordureFill(grille,long,'#')
+>>>>>>> fc3bcbe2c37dd99a7832a7ad0e9c38699ad450bc
     for x in range(long):
         columnShow = []
         for y in range(long):
