@@ -35,7 +35,7 @@ from turtle import bgcolor
 #Import des librairies
 import tkinter as tk
 from time import sleep
-long = 15
+long = 25
 
 #Creer Matrice de 0
 grille =  [[0 for i in range(long)] for j in range(long)]

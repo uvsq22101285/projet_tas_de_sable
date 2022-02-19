@@ -20,30 +20,57 @@ import random as r
 from time import sleep
 from tkinter import font
 from turtle import bgcolor
+from tkinter import messagebox as box
+from tkinter import Entry 
 import tkinter as tk
 from time import sleep
 
 ######################
 #Fenêtres Affichages
 
+
 #variables globales
-long = 9
-#Fonction lié aux WIDGETS
+long = 10
+N = 0
+grille = []
+go = False
+T = 0
+O =1
 
+def start():
+    """lance la simulation"""
+    global long, go, O
+    #if box.askyesno('Lancement Programme','Lancer la simulation ?') == True:
+        #long = int(entry.get())
+    go = True
+    O = 0
+
+def temporaire():
+    """Temporaire pour la fonction de coloration de grille"""
+    global T, go
+    #if box.askyesno('Lancement Programme','Lancer la simulation ?') == True:
+    go = True
+    #T = int(entry_temp.get())
 def recommencer():
-    "pas le temps"
-    global grille, long
-    long = int(input())
+    global N
+    if box.askyesno('Recommencer', 'Voulez vous relancez la simulation ?') == True:
+        N = 0
 
+while O == 1:
+    commande = tk.Tk()
+    canvas_temp = tk.Canvas(commande)
+    #entry = Entry(commande, text="Tapez la taille du carré")
+    #entry_temp = Entry(commande)
+    bouton_start = tk.Button(commande, text="Commencer la simulation", command=start)
+    #bouton_recommencer = tk.Button(commande, text="Recommencer", command=recommencer)
+    #bouton_temporaire = tk.Button(commande, text="temporaire", command=temporaire)
+    #entry.grid(row=1)
+    #entry_temp.grid(row=2)
+    bouton_start.grid(row = 3)
+    #bouton_recommencer.grid(row=4)
+    #bouton_temporaire.grid(row=5)
 
-#WIDGET
-racine = tk.Tk()
-racine.title("Tas de sable")
-canvas = tk.Canvas(racine, height=450, width=450)
-bouton = tk.Button(racine, text="Recommencer", command=recommencer)
-
-
-
+    commande.mainloop()
 
 
 ######################
@@ -53,9 +80,10 @@ bouton = tk.Button(racine, text="Recommencer", command=recommencer)
 #Import des librairies
 
 
+
 #Creer Matrice de 0
-grille =  [[0 for i in range(long)] for j in range(long)]
-grille[long//2][long//2] = 16
+
+    
 
 def FindColor(x,y,g):
     if g[x][y] == '#':
@@ -99,32 +127,41 @@ def sandMove(l):
                 newGrille[x][y+1] +=1
     grille = newGrille
 
+#WIDGET
 
 
 #affiche la grille
-show = []
-for x in range(long):
-    colonnes = []
-    for y in range(long):
-        colonnes.append(canvas.create_rectangle(50*x,50*y,50+50*x,50+50*y,fill=FindColor(x,y,grille),outline="black") )
-    show.append(colonnes)
 
+if go == True:
+    grille =  [[0 for i in range(long)] for j in range(long)]
+    grille[long//2][long//2] = 16
 
-for o in range(1) :
-    bordureFill(grille,long,'#')
+    racine = tk.Tk()
+    racine.title("Tas de sable")
+    canvas = tk.Canvas(racine, height=450, width=450)
+    racine.eval('tk::PlaceWindow %s center' % racine.winfo_toplevel())
+
+    show = []
     for x in range(long):
+        columnShow = []
         for y in range(long):
-            canvas.itemconfig(show[x][y], fill=FindColor(x,y,grille))
-            canvas.grid()  
+            columnShow.append(canvas.create_rectangle(450/long*x,450/long*y,50+450/long*x,50+450/long*y,fill=FindColor(x,y,grille),outline="black") )
+        show.append(columnShow)
+
+
+
+    for o in range(20) :
+        bordureFill(grille,long,'#')
+        for x in range(long):
+            for y in range(long):
+                canvas.itemconfig(show[x][y], fill=FindColor(x,y,grille))
+                canvas.grid()  
+
     sleep(1)  
     bordureFill(grille,long,0)
     sandMove(long)
 
+    print(go)
 
-
-#Placement WIDGET
-
-canvas.grid()
-bouton.grid(row=1)
-racine.mainloop()
+    racine.mainloop()
 
