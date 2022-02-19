@@ -30,20 +30,24 @@ from time import sleep
 
 
 #variables globales
-long = 10
+long = 0
 N = 0
 grille = []
 go = False
-T = 0
-O =1
+T = 1
 
+############
+#Fonctions Widget
 def start():
     """lance la simulation"""
-    global long, go, O
-    #if box.askyesno('Lancement Programme','Lancer la simulation ?') == True:
-        #long = int(entry.get())
+    global long, go, T
+    if box.askyesno('Lancement Programme','Lancer la simulation ?') == True:
+        long = int(entry.get())
+        #T = int(entry_temp.get())
     go = True
-    O = 0
+    T = 0
+    commande.destroy()
+
 
 def temporaire():
     """Temporaire pour la fonction de coloration de grille"""
@@ -51,23 +55,29 @@ def temporaire():
     #if box.askyesno('Lancement Programme','Lancer la simulation ?') == True:
     go = True
     #T = int(entry_temp.get())
-def recommencer():
-    global N
-    if box.askyesno('Recommencer', 'Voulez vous relancez la simulation ?') == True:
-        N = 0
 
-while O == 1:
+def stop():
+    global T
+    commande.destroy()
+    T = 0
+
+def reload():
+    global T
+    racine.destroy()
+    T = 1
+    
+while T == 1 :
     commande = tk.Tk()
     canvas_temp = tk.Canvas(commande)
-    #entry = Entry(commande, text="Tapez la taille du carré")
+    entry = Entry(commande, text="Tapez la taille du carré")
     #entry_temp = Entry(commande)
     bouton_start = tk.Button(commande, text="Commencer la simulation", command=start)
-    #bouton_recommencer = tk.Button(commande, text="Recommencer", command=recommencer)
+    bouton_stop = tk.Button(commande, text="Stop", command=stop)
     #bouton_temporaire = tk.Button(commande, text="temporaire", command=temporaire)
-    #entry.grid(row=1)
+    entry.grid(row=1)
     #entry_temp.grid(row=2)
     bouton_start.grid(row = 3)
-    #bouton_recommencer.grid(row=4)
+    bouton_stop.grid(row=4)
     #bouton_temporaire.grid(row=5)
 
     commande.mainloop()
@@ -82,13 +92,6 @@ while O == 1:
 
 
 #Creer Matrice de 0
-<<<<<<< HEAD
-
-    
-=======
-grille =  [[0 for i in range(long)] for j in range(long)]
-grille[long//2][long//2] = 25
->>>>>>> fc3bcbe2c37dd99a7832a7ad0e9c38699ad450bc
 
 def FindColor(x,y,g):
     if g[x][y] == '#':
@@ -143,15 +146,12 @@ if go == True:
 
     racine = tk.Tk()
     racine.title("Tas de sable")
+    bouton_reload = tk.Button(racine, text="Redémarrer la simulation", command=reload)
     canvas = tk.Canvas(racine, height=450, width=450)
     racine.eval('tk::PlaceWindow %s center' % racine.winfo_toplevel())
+    bouton_reload.grid(row = 1)
 
-<<<<<<< HEAD
     show = []
-=======
-for o in range(16) :
-    bordureFill(grille,long,'#')
->>>>>>> fc3bcbe2c37dd99a7832a7ad0e9c38699ad450bc
     for x in range(long):
         columnShow = []
         for y in range(long):
@@ -160,7 +160,7 @@ for o in range(16) :
 
 
 
-    for o in range(20) :
+    for o in range(10) :
         bordureFill(grille,long,'#')
         for x in range(long):
             for y in range(long):
@@ -170,8 +170,6 @@ for o in range(16) :
     sleep(1)  
     bordureFill(grille,long,0)
     sandMove(long)
-
-    print(go)
 
     racine.mainloop()
 
