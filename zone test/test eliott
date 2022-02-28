@@ -1,0 +1,111 @@
+#LIBRARIES HERE
+import tkinter as tk
+from random import randint
+
+#CONSTANT HERE
+global long
+long = 11 #nbr de carré de côté
+tkX, tkY = 550,550
+
+
+#CHOOSE A COLOR
+def FindColor(x,y,g):
+    if g[x][y] == '#':
+        return("blue")
+    if g[x][y]<1:
+        return("white")
+    if g[x][y]<3:
+        return("yellow")
+    if g[x][y]<4:
+        return("orange")
+    return("red")
+
+#ADD BORDER
+def bordureFill(g,l,b):
+    for i in range(l):
+        for j in range(l):
+            g[i][0] = b
+            g[i][-1] = b
+            g[0][j] = b
+            g[-1][j] = b
+    return g
+
+#RANDOM MATRICE
+def randomGrille():
+    global grille
+    grille = [[randint(0,4) for i in range(long)] for j in range(long)]
+    affGrille(grille)
+    
+#PILE MATRICE
+def pileGrille():
+    N = eval(input())
+    global grille
+    grille = [[0 for i in range(long)] for j in range(long)]
+    grille[long//2][long//2] = N
+    affGrille(grille)
+
+#AFFICHAGE DE LA GRILLE
+def affGrille(grille):
+    bordureFill(grille,long,'#')
+    for x in range(long):
+        for y in range(long):
+            canvas.create_rectangle(550//long*x,550//long*y,50+550//long*x,50+550//long*y,fill=FindColor(x,y,grille),outline="black")
+            canvas.grid()
+    return(grille)
+
+
+#DEPLACE LE SABLE
+def sandMove():
+    global grille
+    newGrille = [[0 for i in range(long)] for j in range(long)]
+    bordureFill(grille,long,0)
+    for x in range(long):
+        for y in range(long):
+            num = grille[x][y]
+            if num < 4  :
+                newGrille[x][y] = grille[x][y]
+    for x in range(long):
+        for y in range(long):
+            num = grille[x][y]
+            if num >= 4 :
+                newGrille[x][y] += num -4
+                newGrille[x-1][y] +=1
+                newGrille[x+1][y] +=1
+                newGrille[x][y-1] +=1
+                newGrille[x][y+1] +=1
+    grille = newGrille
+    affGrille(grille)
+    
+#UNDO
+def sandBack():
+    pass
+
+#DESSIN AVEC DU SABLE
+def ajoutSable(event):
+    if dessin.get() ==0:
+        pass
+    else:
+        global grille
+        x1 = long*event.x//tkX
+        y1 = long*event.y//tkY
+        grille[x1][y1] +=1
+        print(dessin)
+        affGrille(grille)
+
+#TKINTER
+root = tk.Tk()
+canvas= tk.Canvas(root,height=tkY,width=tkX,bg='black')
+root.bind("<Button-1>",ajoutSable)
+dessin = tk.IntVar()
+BtnRandom = tk.Button(text='Random',command= randomGrille)
+BtnRandom.grid()
+BtnPile = tk.Button(text='Pile',command= pileGrille)
+BtnPile.grid()
+BtnUndo = tk.Button(text='<',command= sandBack)
+BtnUndo.grid()
+BtnRedo = tk.Button(text='>',command= sandMove)
+BtnRedo.grid()
+
+CheckDessin = tk.Checkbutton(root,text="Drawing",variable=dessin,onvalue=1,offvalue=0)
+CheckDessin.grid()
+root.mainloop()
