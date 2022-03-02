@@ -6,8 +6,8 @@ from random import randint
 global long
 long = 11 #nbr de carré de côté
 tkX, tkY = 550,550
-
-
+#Historique des grilles
+hGrille = []
 #CHOOSE A COLOR
 def FindColor(x,y,g):
     if g[x][y] == '#':
@@ -34,6 +34,7 @@ def bordureFill(g,l,b):
 def randomGrille():
     global grille
     grille = [[randint(0,4) for i in range(long)] for j in range(long)]
+    hGrille.append(grille)
     affGrille(grille)
     
 #PILE MATRICE
@@ -42,6 +43,7 @@ def pileGrille():
     global grille
     grille = [[0 for i in range(long)] for j in range(long)]
     grille[long//2][long//2] = N
+    hGrille.append(grille)
     affGrille(grille)
 
 #AFFICHAGE DE LA GRILLE
@@ -74,22 +76,27 @@ def sandMove():
                 newGrille[x][y-1] +=1
                 newGrille[x][y+1] +=1
     grille = newGrille
+    hGrille.append(grille)
     affGrille(grille)
     
 #UNDO
 def sandBack():
-    pass
+    global grille
+    print(hGrille)
+    if len(hGrille)>1:
+        hGrille.pop(len(hGrille)-1)
+        grille = hGrille[len(hGrille)-1]
+        affGrille(grille)
 
 #DESSIN AVEC DU SABLE
 def ajoutSable(event):
-    if dessin.get() ==0:
-        pass
-    else:
+    if dessin.get() !=0:
         global grille
         x1 = long*event.x//tkX
         y1 = long*event.y//tkY
         grille[x1][y1] +=1
         print(dessin)
+        hGrille.append(grille)
         affGrille(grille)
 
 #TKINTER
