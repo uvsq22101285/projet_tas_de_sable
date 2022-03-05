@@ -1,7 +1,7 @@
 #LIBRARIES HERE
+import os
 import tkinter as tk
 from random import randint
-import time
 
 #CONSTANT HERE
 global long
@@ -98,10 +98,28 @@ def ajoutSable(event):
         hGrille.append(grille)
         affGrille(grille)
 
+def saving():
+    global fic
+    bordureFill(grille,long,0)
+    fic = open("ficName","w+")
+    for a in range(long):
+        for b in range(long):
+            fic.write(str(grille[a][b]))
+            fic.write(',')
+        fic.write('\n')
+
+def loading():
+    l = [[i for i in line.split(',')] for line in fic]
+    for a in range (long): 
+        l[a].remove('\n')
+        for b in range (long):
+            l[a][b] = int(l[a][b])
+    fic.close()
+    affGrille(l)
 
 #TKINTER
 root = tk.Tk()
-canvas= tk.Canvas(root,height=tkY,width=tkX)
+canvas = tk.Canvas(root,height=tkY,width=tkX)
 root.bind("<Button-1>",ajoutSable)
 dessin = tk.IntVar()
 BtnRandom = tk.Button(text='Random',command= randomGrille)
@@ -112,9 +130,9 @@ BtnUndo = tk.Button(text='<',command= sandBack)
 BtnUndo.grid(column=0,row=1)
 BtnRedo = tk.Button(text='>',command= sandMove)
 BtnRedo.grid(column=1,row=1)
-BtnSave = tk.Button(text='Save')#command=saving
+BtnSave = tk.Button(text='Save',command=saving)#command=saving
 BtnSave.grid(column=0,row=2)
-BtnLoad = tk.Button(text='Load')#command=loading
+BtnLoad = tk.Button(text='Load',command=loading)#command=loading
 BtnLoad.grid(column=1,row=2)
 
 CheckDessin = tk.Checkbutton(root,text="Drawing",variable=dessin,onvalue=1,offvalue=0)
