@@ -1,6 +1,7 @@
 #LIBRARIES HERE
 import tkinter as tk
 from random import randint
+import time
 
 #CONSTANT HERE
 global long
@@ -82,7 +83,6 @@ def sandMove():
 #UNDO
 def sandBack():
     global grille
-    print(hGrille)
     if len(hGrille)>1:
         hGrille.pop(len(hGrille)-1)
         grille = hGrille[len(hGrille)-1]
@@ -95,23 +95,27 @@ def ajoutSable(event):
         x1 = long*event.x//tkX
         y1 = long*event.y//tkY
         grille[x1][y1] +=1
-        print(dessin)
         hGrille.append(grille)
         affGrille(grille)
 
+
 #TKINTER
 root = tk.Tk()
-canvas= tk.Canvas(root,height=tkY,width=tkX,bg='black')
+canvas= tk.Canvas(root,height=tkY,width=tkX)
 root.bind("<Button-1>",ajoutSable)
 dessin = tk.IntVar()
 BtnRandom = tk.Button(text='Random',command= randomGrille)
-BtnRandom.grid()
+BtnRandom.grid(column=0,row=0)
 BtnPile = tk.Button(text='Pile',command= pileGrille)
-BtnPile.grid()
+BtnPile.grid(column=1,row=0)
 BtnUndo = tk.Button(text='<',command= sandBack)
-BtnUndo.grid()
+BtnUndo.grid(column=0,row=1)
 BtnRedo = tk.Button(text='>',command= sandMove)
-BtnRedo.grid()
+BtnRedo.grid(column=1,row=1)
+BtnSave = tk.Button(text='Save')#command=saving
+BtnSave.grid(column=0,row=2)
+BtnLoad = tk.Button(text='Load')#command=loading
+BtnLoad.grid(column=1,row=2)
 
 CheckDessin = tk.Checkbutton(root,text="Drawing",variable=dessin,onvalue=1,offvalue=0)
 CheckDessin.grid()
