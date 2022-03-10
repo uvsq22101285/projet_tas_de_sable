@@ -1,7 +1,8 @@
 #LIBRARIES HERE
-import os
+
 import tkinter as tk
 from random import randint
+
 
 #CONSTANT HERE
 global long
@@ -15,11 +16,14 @@ def FindColor(x,y,g):
         return("blue")
     if g[x][y]<1:
         return("white")
-    if g[x][y]<3:
+    if g[x][y]<2:
         return("yellow")
-    if g[x][y]<4:
+    if g[x][y]<3:
         return("orange")
-    return("red")
+    if g[x][y]<4:
+        return("red")
+    else:
+        return("firebrick")
 
 #ADD BORDER
 def bordureFill(g,l,b):
@@ -49,12 +53,15 @@ def pileGrille():
 
 #AFFICHAGE DE LA GRILLE
 def affGrille(grille):
+    canvas.grid(columnspan=2,row=5)
     bordureFill(grille,long,'#')
+    t=550/long
     for x in range(long):
         for y in range(long):
-            canvas.create_rectangle(550//long*x,550//long*y,50+550//long*x,50+550//long*y,fill=FindColor(x,y,grille),outline="black")
+            canvas.create_rectangle(t*x,t*y,t+t*x,t+t*y,fill=FindColor(x,y,grille),outline="black")
             canvas.grid()
     return(grille)
+
 
 
 #DEPLACE LE SABLE
@@ -117,6 +124,11 @@ def loading():
     fic.close()
     affGrille(l)
 
+def lancer():
+    global long
+    long=int(ask.get())
+    return(long)
+
 #TKINTER
 root = tk.Tk()
 canvas = tk.Canvas(root,height=tkY,width=tkX)
@@ -135,6 +147,11 @@ BtnSave.grid(column=0,row=2)
 BtnLoad = tk.Button(text='Load',command=loading)#command=loading
 BtnLoad.grid(column=1,row=2)
 
+ask = tk.Entry(root, text="entré un nombre")
+ask.grid(column=0,row=3)
+start = tk.Button(root, text="side length",command=lancer)
+start.grid(column=1,row=3)
+
 CheckDessin = tk.Checkbutton(root,text="Drawing",variable=dessin,onvalue=1,offvalue=0)
-CheckDessin.grid()
+CheckDessin.grid(column=0,row=4)
 root.mainloop()
